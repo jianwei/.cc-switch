@@ -1,0 +1,43 @@
+{
+  "expectations": [
+    {
+      "text": "outputs/trainorder.js 文件存在且可读",
+      "passed": true,
+      "evidence": "文件存在: iteration-1/mixed-review/without_skill/outputs/trainorder.js"
+    },
+    {
+      "text": "trainorder.js 中定义了订单取消状态常量（如 ORDER_STATUS_CANCELED）",
+      "passed": true,
+      "evidence": "找到常量定义"
+    },
+    {
+      "text": "在 loadTrainDetail 函数入口处统一提取了 orderStatus 变量",
+      "passed": true,
+      "evidence": "找到 orderStatus 变量定义"
+    },
+    {
+      "text": "条件判断中使用统一变量和常量，不再直接使用 $orderBrief.status == 8",
+      "passed": true,
+      "evidence": "if 条件使用 orderStatus === ORDER_STATUS_ 形式"
+    },
+    {
+      "text": "outputs/report.md 文件存在",
+      "passed": true,
+      "evidence": "文件存在: iteration-1/mixed-review/without_skill/outputs/report.md"
+    },
+    {
+      "text": "report.md 中列出需要人工确认的非代码建议（如下游服务、APP 联调、类型校验、部署步骤中的至少两项）",
+      "passed": true,
+      "evidence": "匹配到 7 个关键词: 下游服务, 类型校验, mvn resources, 部署, 缓存, WebView, httpOnly"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 179.3
+  }
+}

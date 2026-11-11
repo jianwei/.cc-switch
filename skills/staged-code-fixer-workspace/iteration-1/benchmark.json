@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "skill_name": "staged-code-fixer",
+    "skill_path": "/Users/chenjianwei2/.claude/skills/staged-code-fixer",
+    "executor_model": "kimi-3",
+    "analyzer_model": "kimi-3",
+    "timestamp": "2026-07-23T12:20:00Z",
+    "evals_run": [1, 2, 3],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "magic-number",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 158.5,
+        "tokens": 40335,
+        "tool_calls": 14,
+        "errors": 0
+      },
+      "expectations": [],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "magic-number",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 89.5,
+        "tokens": 34766,
+        "tool_calls": 11,
+        "errors": 0
+      },
+      "expectations": [],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "data-source",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 114.8,
+        "tokens": 36923,
+        "tool_calls": 13,
+        "errors": 0
+      },
+      "expectations": [],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "data-source",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 110.4,
+        "tokens": 36000,
+        "tool_calls": 11,
+        "errors": 0
+      },
+      "expectations": [],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "mixed-review",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 141.9,
+        "tokens": 39099,
+        "tool_calls": 14,
+        "errors": 0
+      },
+      "expectations": [],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "mixed-review",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 179.3,
+        "tokens": 39723,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 138.4, "stddev": 22.1, "min": 114.8, "max": 158.5},
+      "tokens": {"mean": 38786, "stddev": 1702, "min": 36923, "max": 40335}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0},
+      "time_seconds": {"mean": 126.4, "stddev": 45.0, "min": 89.5, "max": 179.3},
+      "tokens": {"mean": 36830, "stddev": 2491, "min": 34766, "max": 39723}
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+12.0",
+      "tokens": "+1956"
+    }
+  },
+  "notes": [
+    "所有断言在 with_skill 和 without_skill 两种配置下均 100% 通过，说明当前测试用例无法区分 skill 价值",
+    "当前用例过于简单，基础模型（无 skill）也能正确完成魔法数字提取和数据来源统一",
+    "with_skill 平均耗时比 without_skill 多 12 秒，主要来自读取 skill 和生成结构化报告",
+    "with_skill 的输出在报告格式和分类处理（已修复/未修复/建议事项）上更一致",
+    "建议下一轮迭代增加更复杂的评测用例，例如：模糊或冲突的审查意见、需要拒绝的危险修复建议、多文件联动场景"
+  ]
+}

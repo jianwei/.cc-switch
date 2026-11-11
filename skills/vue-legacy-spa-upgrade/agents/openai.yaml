@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vue Legacy SPA Upgrade"
+  short_description: "Upgrade one legacy Vue page safely"
+  default_prompt: "Use $vue-legacy-spa-upgrade to modernize this legacy Vue single page while preserving behavior."

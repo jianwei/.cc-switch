@@ -1,0 +1,17 @@
+{
+  "update": {
+    "strategy": "overwrite",
+    "autoTranslate": false,
+    "exclude": []
+  },
+  "registry": {
+    "baseUrl": ""
+  },
+  "schedule": {
+    "type": "weekly",
+    "day": "monday",
+    "dayNum": "1",
+    "time": "08:30",
+    "enabled": true
+  }
+}

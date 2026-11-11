@@ -1,0 +1,43 @@
+{
+  "expectations": [
+    {
+      "text": "outputs/trainorder.js 文件存在且可读",
+      "passed": true,
+      "evidence": "文件存在: iteration-1/magic-number/with_skill/outputs/trainorder.js"
+    },
+    {
+      "text": "trainorder.js 中定义了订单取消状态常量（如 ORDER_STATUS_CANCELED）",
+      "passed": true,
+      "evidence": "找到常量定义"
+    },
+    {
+      "text": "trainorder.js 中不再直接使用魔法数字 8 进行比较",
+      "passed": true,
+      "evidence": "未找到 status == 8 或 status === 8"
+    },
+    {
+      "text": "条件判断的业务逻辑保持等价（仍然判断订单状态是否为已取消）",
+      "passed": true,
+      "evidence": "条件判断仍使用 ORDER_STATUS_ 常量比较"
+    },
+    {
+      "text": "outputs/report.md 文件存在",
+      "passed": true,
+      "evidence": "文件存在: iteration-1/magic-number/with_skill/outputs/report.md"
+    },
+    {
+      "text": "report.md 中明确提到已修复魔法数字问题",
+      "passed": true,
+      "evidence": "报告中提到魔法数字/常量相关关键词"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 158.5
+  }
+}

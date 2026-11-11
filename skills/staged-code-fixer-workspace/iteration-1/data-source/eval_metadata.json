@@ -1,0 +1,13 @@
+{
+  "eval_id": 2,
+  "eval_name": "data-source",
+  "prompt": "请在 /tmp/staged-fixer-eval-datasource/ 中初始化一个 git 仓库，并创建文件 src/main/resources/META-INF/resources/js/tmc/order/trainorder.js，内容如下：\n\n```javascript\nfunction loadTrainDetail() {\n    var $orderBrief = $data.listBasic;\n\n    if ($orderBrief.status == 8 && $data.alipayEnterprisePayTimeoutClosedFlag) {\n        showTimeoutClosed();\n    }\n}\n```\n\n将文件 `git add` 到暂存区。\n\n然后我收到了以下代码审查意见：\n\n```\nLOW - maintainability\n文件: src/main/resources/META-INF/resources/js/tmc/order/trainorder.js\n行号: 939\n问题: trainorder.js 中新增的订单状态判断条件中，orderStatus 来自 $orderBrief.status，而 alipayEnterprisePayTimeoutClosedFlag 来自 $data（根级数据），两者数据来源不一致。\n建议: 建议在 loadTrainDetail 函数入口处统一从 $data 中提取 orderStatus（如 const orderStatus = $data.listBasic.orderStatus || $orderBrief.status），保持所有状态判断的数据来源一致，降低未来重构时的维护成本。\n```\n\n请检查暂存区代码是否存在这个问题，自动修复安全的 maintainability 问题（不要修改业务逻辑），并输出处理报告。将修改后的文件内容保存到 outputs/trainorder.js，报告保存到 outputs/report.md。",
+  "assertions": [
+    "outputs/trainorder.js 文件存在且可读",
+    "在 loadTrainDetail 函数入口处统一提取了 orderStatus 变量",
+    "条件判断中使用统一提取的 orderStatus 变量，而不是直接使用 $orderBrief.status",
+    "保留了原表达式的兜底逻辑，业务逻辑真值保持不变",
+    "outputs/report.md 文件存在",
+    "report.md 中明确提到已修复数据来源不一致问题"
+  ]
+}

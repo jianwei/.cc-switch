@@ -1,0 +1,13 @@
+{
+  "eval_id": 1,
+  "eval_name": "magic-number",
+  "prompt": "请在 /tmp/staged-fixer-eval-magic/ 中初始化一个 git 仓库，并创建文件 src/main/resources/META-INF/resources/js/tmc/order/trainorder.js，内容如下：\n\n```javascript\nfunction loadTrainDetail() {\n    var $orderBrief = $data.listBasic;\n\n    if ($orderBrief.status == 8) {\n        showTimeoutClosed();\n    }\n}\n```\n\n将文件 `git add` 到暂存区。\n\n然后我收到了以下代码审查意见：\n\n```\nLOW - maintainability\n文件: src/main/resources/META-INF/resources/js/tmc/order/trainorder.js\n行号: 939\n问题: trainorder.js 中硬编码了 orderStatus == 8 的魔法数字，缺乏可读性且不利于后续维护。8 表示订单已取消状态，应定义为一个有意义的常量。\n建议: 建议在文件头部或相关作用域定义订单状态常量，如 var ORDER_STATUS_CANCELED = 8; 然后用 orderStatus === ORDER_STATUS_CANCELED 替代硬编码的数字比较。\n```\n\n请检查暂存区代码是否存在这个问题，自动修复安全的 maintainability 问题（不要修改业务逻辑），并输出处理报告。将修改后的文件内容保存到 outputs/trainorder.js，报告保存到 outputs/report.md。",
+  "assertions": [
+    "outputs/trainorder.js 文件存在且可读",
+    "trainorder.js 中定义了订单取消状态常量（如 ORDER_STATUS_CANCELED）",
+    "trainorder.js 中不再直接使用魔法数字 8 进行比较",
+    "条件判断的业务逻辑保持等价（仍然判断订单状态是否为已取消）",
+    "outputs/report.md 文件存在",
+    "report.md 中明确提到已修复魔法数字问题"
+  ]
+}

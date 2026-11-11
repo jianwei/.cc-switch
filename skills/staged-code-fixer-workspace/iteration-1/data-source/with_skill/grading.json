@@ -1,0 +1,43 @@
+{
+  "expectations": [
+    {
+      "text": "outputs/trainorder.js 文件存在且可读",
+      "passed": true,
+      "evidence": "文件存在: iteration-1/data-source/with_skill/outputs/trainorder.js"
+    },
+    {
+      "text": "在 loadTrainDetail 函数入口处统一提取了 orderStatus 变量",
+      "passed": true,
+      "evidence": "找到 orderStatus 变量定义"
+    },
+    {
+      "text": "条件判断中使用统一提取的 orderStatus 变量，而不是直接使用 $orderBrief.status",
+      "passed": true,
+      "evidence": "if 条件中使用 orderStatus"
+    },
+    {
+      "text": "保留了原表达式的兜底逻辑，业务逻辑真值保持不变",
+      "passed": true,
+      "evidence": "同时引用 $data.listBasic.orderStatus 和 $orderBrief.status，保留兜底"
+    },
+    {
+      "text": "outputs/report.md 文件存在",
+      "passed": true,
+      "evidence": "文件存在: iteration-1/data-source/with_skill/outputs/report.md"
+    },
+    {
+      "text": "report.md 中明确提到已修复数据来源不一致问题",
+      "passed": true,
+      "evidence": "报告中提到数据来源/orderStatus 相关关键词"
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_duration_seconds": 114.8
+  }
+}

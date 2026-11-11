@@ -1,0 +1,13 @@
+{
+  "eval_id": 3,
+  "eval_name": "mixed-review",
+  "prompt": "请在 /tmp/staged-fixer-eval-mixed/ 中初始化一个 git 仓库，并创建文件 src/main/resources/META-INF/resources/js/tmc/order/trainorder.js，内容如下：\n\n```javascript\nfunction loadTrainDetail() {\n    var $orderBrief = $data.listBasic;\n\n    if ($orderBrief.status == 8 && $data.alipayEnterprisePayTimeoutClosedFlag) {\n        showTimeoutClosed();\n    }\n}\n```\n\n将文件 `git add` 到暂存区。\n\n然后我收到了以下完整代码审查意见：\n\n```\n发现的问题:\nLOW - maintainability\n文件: src/main/resources/META-INF/resources/js/tmc/order/trainorder.js\n行号: 939\n问题: trainorder.js 中新增的订单状态判断条件中，orderStatus 来自 $orderBrief.status，而 alipayEnterprisePayTimeoutClosedFlag 来自 $data（根级数据），两者数据来源不一致。当后端返回的数据结构中这两个字段不在同一层级时，依赖调用方确保两者均正确传入，存在一定隐性耦合风险。\n建议: 建议在 loadTrainDetail 函数入口处统一从 $data 中提取 orderStatus（如 const orderStatus = $data.listBasic.orderStatus || $orderBrief.status），保持所有状态判断的数据来源一致，降低未来重构时的维护成本。\nLOW - maintainability\n文件: src/main/resources/META-INF/resources/js/tmc/order/trainorder.js\n行号: 939\n问题: trainorder.js 中硬编码了 orderStatus == 8 的魔法数字，缺乏可读性且不利于后续维护。8 表示订单已取消状态，应定义为一个有意义的常量。\n建议: 建议在文件头部或相关作用域定义订单状态常量，如 var ORDER_STATUS_CANCELED = 8; 然后用 orderStatus === ORDER_STATUS_CANCELED 替代硬编码的数字比较。\n改进建议:\n建议确认下游服务已将 alipayEnterprisePayTimeoutClosedFlag 字段上线到生产环境，否则前端判断将始终不生效。\nisApp Cookie 改为非 httpOnly 后，建议与 APP 团队联调确认内嵌 WebView 中 JS 读取该 Cookie 的行为符合预期。\n后续类似字段透传的场景建议考虑在全局状态层（如 data 对象的统一处理入口）增加类型校验，避免后端 Boolean/字符串序列化不一致导致的前端判断失效。\n部署前需执行 mvn resources:resources 确保修改后的 trainorder.js 同步到 target/classes，并清理浏览器缓存验证。\n```\n\n请检查暂存区代码是否存在这些问题，自动修复安全的 maintainability 问题（不要修改业务逻辑），把无法自动处理的建议单独列出。将修改后的文件内容保存到 outputs/trainorder.js，报告保存到 outputs/report.md。",
+  "assertions": [
+    "outputs/trainorder.js 文件存在且可读",
+    "trainorder.js 中定义了订单取消状态常量（如 ORDER_STATUS_CANCELED）",
+    "在 loadTrainDetail 函数入口处统一提取了 orderStatus 变量",
+    "条件判断中使用统一变量和常量，不再直接使用 $orderBrief.status == 8",
+    "outputs/report.md 文件存在",
+    "report.md 中列出需要人工确认的非代码建议（如下游服务、APP 联调、类型校验、部署步骤中的至少两项）"
+  ]
+}

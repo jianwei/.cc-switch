@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fix Bug by DingDing"
+  short_description: "补齐 local/reason 列，修复前端 Bug，详细备注非前端问题"
+  default_prompt: "Use $fix-bug-by-dingding to read DingDing bug rows, add missing local and reason columns, and diagnose ownership before editing. Fix frontend bugs with before/after screenshots, one commit per bug, and local=done; leave code and local unchanged for non-frontend issues and save detailed evidence in reason. Read all written cells back."
